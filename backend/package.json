@@ -2,7 +2,7 @@
   "name": "moviestheatres",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,5 +26,8 @@
     "grunt-contrib-livereload": "0.1.1",
     "grunt-contrib-watch": "^0.6.1",
     "mysql": "^2.10.2"
+  },
+  "dependencies": {
+    "nodemon": "^1.10.2"
   }
 }
