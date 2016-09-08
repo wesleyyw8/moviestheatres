@@ -32,6 +32,11 @@ app.use('/theatres', theatres);
 var showtime = require('./routes/showtime');
 app.use('/showtime', showtime);
 
+app.use(express.static(__dirname.replace(/backend$/, "")+ '/frontend')); 
+app.get('/', function(request,response){
+  response.sendFile(__dirname.replace(/backend$/, "") + '/frontend/views/index.html');
+});
+
 app.listen(port, function(){
   console.log('funcionando na porta: '+port);
 });
