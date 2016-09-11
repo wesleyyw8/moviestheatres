@@ -2,12 +2,41 @@
 <head>
   <meta charset="UTF-8">
   <title>:D</title>
-  <link href="../css/main.css" rel="stylesheet" type="text/css">
+  <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="../style.css" rel="stylesheet" type="text/css">
 </head>
-<body>
-  <div class="main">
-    Wesley teste
+<body ng-app="moviesTheatresApp">
+  <div class="index" ng-controller="indexController">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <p class="navbar-text">Wesley app :D</p>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li ng-class="{ 'active': isActive('/movies') }"><a href="/#/movies">Movies</a></li>
+            <li ng-class="{ 'active': isActive('/theatres') }"><a href="/#/theatres">Theatres</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <div class="page-content">
+      <div ng-view></div>
+    </div>
   </div>
-  <script src="../appications.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="../application.js"></script>
 </body>
 </html>

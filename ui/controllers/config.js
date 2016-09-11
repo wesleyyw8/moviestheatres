@@ -15,15 +15,3 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider,$loca
     });
 }]);
 
-
-app.controller('indexController', ['$scope','$location', function($scope, $location){
-  $scope.isActive = function (viewLocation) { 
-    return viewLocation === $location.path();
-  };
-}]);
-app.controller('moviesController', ['$scope', function($scope){
-  //console.log('movies');
-}]);
-app.controller('theatresController', ['$scope', function($scope){
- // console.log('theatres');
-}]);
