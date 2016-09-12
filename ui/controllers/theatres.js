@@ -1,3 +1,5 @@
-app.controller('theatresController', ['$scope', function($scope){
- // console.log('theatres');
+app.controller('theatresController', ['$scope','dataService', function($scope,dataService){
+  dataService.getTheatres().then(function(data){
+    console.log(data);
+  });
 }]);

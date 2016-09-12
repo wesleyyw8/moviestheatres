@@ -15,3 +15,14 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider,$loca
     });
 }]);
 
+app.factory('Config', [function() {
+  var baseUrl = "/endpoints";
+  return {
+    base_url: baseUrl,
+    endpoints: {
+      getMovies: "/Movies",
+      getTheatres: "/Theatres",
+    }
+  };
+}]);
+
