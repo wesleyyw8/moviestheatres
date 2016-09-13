@@ -2,12 +2,23 @@ app.service('dataService', ["$q", "$http", "Config", function ($q, $http, Config
     var service = {
       getMovies: getMovies,
       getTheatres: getTheatres,
+      getTheatresById: getTheatresById
     };
     return service;
     function getTheatres(){
       var def = $q.defer();
       $http.get(Config.base_url + Config.endpoints.getTheatres).success(function(data){
         def.resolve(data);
+      })
+      .error(function(){
+        def.reject("fail");
+      })
+      return def.promise;
+    }
+    function getTheatresById(id){
+      var def = $q.defer();
+      $http.get(Config.base_url + Config.endpoints.getTheatres+"/"+id).success(function(data){
+        def.resolve(data[0]);
       })
       .error(function(){
         def.reject("fail");

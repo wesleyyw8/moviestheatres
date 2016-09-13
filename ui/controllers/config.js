@@ -10,6 +10,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider,$loca
       templateUrl: '../views/movies.html',
       controller: 'moviesController'
     }).
+    when('/theatres/:id', {
+      templateUrl: '../views/theatreDetail.html',
+      controller: 'theatreDetailController'
+    }).
     otherwise({
       redirectTo: '/movies'
     });

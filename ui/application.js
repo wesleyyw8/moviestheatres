@@ -10,6 +10,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider,$loca
       templateUrl: '../views/movies.html',
       controller: 'moviesController'
     }).
+    when('/theatres/:id', {
+      templateUrl: '../views/theatreDetail.html',
+      controller: 'theatreDetailController'
+    }).
     otherwise({
       redirectTo: '/movies'
     });
@@ -38,21 +42,40 @@ app.controller('moviesController', ['$scope', 'dataService',function($scope, dat
     console.log(data.movies);
   });
 }]);
+app.controller('theatreDetailController', ['$scope','dataService','$routeParams', function($scope,dataService,$routeParams){
+
+  dataService.getTheatresById($routeParams.id).then(function(data){
+    $scope.theatre = data;
+    console.log($scope.theatre);
+  });
+}]);
 app.controller('theatresController', ['$scope','dataService', function($scope,dataService){
   dataService.getTheatres().then(function(data){
-    console.log(data);
+    $scope.theatres = data.theatres;
+    console.log($scope.theatres);
   });
 }]);
 app.service('dataService', ["$q", "$http", "Config", function ($q, $http, Config) {
     var service = {
       getMovies: getMovies,
       getTheatres: getTheatres,
+      getTheatresById: getTheatresById
     };
     return service;
     function getTheatres(){
       var def = $q.defer();
       $http.get(Config.base_url + Config.endpoints.getTheatres).success(function(data){
         def.resolve(data);
+      })
+      .error(function(){
+        def.reject("fail");
+      })
+      return def.promise;
+    }
+    function getTheatresById(id){
+      var def = $q.defer();
+      $http.get(Config.base_url + Config.endpoints.getTheatres+"/"+id).success(function(data){
+        def.resolve(data[0]);
       })
       .error(function(){
         def.reject("fail");

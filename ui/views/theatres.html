@@ -1,1 +1,13 @@
-theatres
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-3 text-center theatreThumb" ng-repeat="theatre in theatres">
+      <div class="thumbnail">
+        <div class="caption">
+          <h3 class="title">{{theatre.name}}</h3>
+          <p>{{theatre.counting > 0 ? theatre.counting+' movies diferentes nesse theatre.' : 'nenhum filme rolando nesse theatre.'}} </p>
+          <p><a href="#/theatres/{{theatre.id}}" class="btn btn-primary" role="button">Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
