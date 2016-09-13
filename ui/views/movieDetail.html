@@ -1,17 +1,17 @@
-<h1>Theatre Detalhes</h1>
+<h1>{{movieTitle}}</h1>
 <table class="table table-bordered">
   <thead>
     <tr>
       <th>#</th>
-      <th>Título</th>
+      <th>Nome do teatro</th>
       <th>Hora</th>
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="showtime in showTimeList">
+    <tr ng-repeat="theatre in theatres">
       <th scope="row">{{$index+1}}</th>
-      <td>{{showtime.title}}</td>
-      <td>{{showtime.time}}</td>
+      <td>{{theatre.theatreName}}</td>
+      <td>{{theatre.time}}</td>
     </tr>
   </tbody>
 </table>

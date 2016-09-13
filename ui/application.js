@@ -14,6 +14,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider,$loca
       templateUrl: '../views/theatreDetail.html',
       controller: 'theatreDetailController'
     }).
+    when('/movies/:id', {
+      templateUrl: '../views/movieDetail.html',
+      controller: 'moviesDetailController'
+    }).
     otherwise({
       redirectTo: '/movies'
     });
@@ -27,6 +31,8 @@ app.factory('Config', [function() {
       getMovies: "/Movies",
       getTheatres: "/Theatres",
       getShowTime: "/Showtime",
+      getShowTimeByTheatreId: "/Showtime/byTheatreId",
+      getShowTimeByMovieId: "/Showtime/byMovieId"
     }
   };
 }]);
@@ -36,6 +42,13 @@ app.controller('indexController', ['$scope','$location', function($scope, $locat
   $scope.isActive = function (viewLocation) { 
     return viewLocation === $location.path();
   };
+}]);
+app.controller('moviesDetailController', ['$scope', 'dataService','$routeParams',function($scope, dataService, $routeParams){
+  dataService.getShowTimeByMovieId($routeParams.id).then(function(data){
+    $scope.theatres = data;
+    $scope.movieTitle = data[0].title;
+    console.log(data);
+  });
 }]);
 app.controller('moviesController', ['$scope', 'dataService',function($scope, dataService){
   dataService.getMovies().then(function(data){
@@ -59,7 +72,8 @@ app.service('dataService', ["$q", "$http", "Config", function ($q, $http, Config
     var service = {
       getMovies: getMovies,
       getTheatres: getTheatres,
-      getShowTimeByTheatreId: getShowTimeByTheatreId
+      getShowTimeByTheatreId: getShowTimeByTheatreId,
+      getShowTimeByMovieId: getShowTimeByMovieId
     };
     return service;
     function getTheatres(){
@@ -74,7 +88,17 @@ app.service('dataService', ["$q", "$http", "Config", function ($q, $http, Config
     }
     function getShowTimeByTheatreId(id){
       var def = $q.defer();
-      $http.get(Config.base_url + Config.endpoints.getShowTime+"/"+id).success(function(data){
+      $http.get(Config.base_url + Config.endpoints.getShowTimeByTheatreId+"/"+id).success(function(data){
+        def.resolve(data);
+      })
+      .error(function(){
+        def.reject("fail");
+      })
+      return def.promise;
+    }
+    function getShowTimeByMovieId(id){
+      var def = $q.defer();
+      $http.get(Config.base_url + Config.endpoints.getShowTimeByMovieId+"/"+id).success(function(data){
         def.resolve(data);
       })
       .error(function(){

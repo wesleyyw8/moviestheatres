@@ -14,6 +14,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider,$loca
       templateUrl: '../views/theatreDetail.html',
       controller: 'theatreDetailController'
     }).
+    when('/movies/:id', {
+      templateUrl: '../views/movieDetail.html',
+      controller: 'moviesDetailController'
+    }).
     otherwise({
       redirectTo: '/movies'
     });
@@ -27,6 +31,8 @@ app.factory('Config', [function() {
       getMovies: "/Movies",
       getTheatres: "/Theatres",
       getShowTime: "/Showtime",
+      getShowTimeByTheatreId: "/Showtime/byTheatreId",
+      getShowTimeByMovieId: "/Showtime/byMovieId"
     }
   };
 }]);
