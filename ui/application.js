@@ -26,6 +26,7 @@ app.factory('Config', [function() {
     endpoints: {
       getMovies: "/Movies",
       getTheatres: "/Theatres",
+      getShowTime: "/Showtime",
     }
   };
 }]);
@@ -43,10 +44,9 @@ app.controller('moviesController', ['$scope', 'dataService',function($scope, dat
   });
 }]);
 app.controller('theatreDetailController', ['$scope','dataService','$routeParams', function($scope,dataService,$routeParams){
-
-  dataService.getTheatresById($routeParams.id).then(function(data){
-    $scope.theatre = data;
-    console.log($scope.theatre);
+  dataService.getShowTimeByTheatreId($routeParams.id).then(function(data){
+    $scope.showTimeList = data;
+    console.log($scope.showTimeList);
   });
 }]);
 app.controller('theatresController', ['$scope','dataService', function($scope,dataService){
@@ -59,7 +59,7 @@ app.service('dataService', ["$q", "$http", "Config", function ($q, $http, Config
     var service = {
       getMovies: getMovies,
       getTheatres: getTheatres,
-      getTheatresById: getTheatresById
+      getShowTimeByTheatreId: getShowTimeByTheatreId
     };
     return service;
     function getTheatres(){
@@ -72,10 +72,10 @@ app.service('dataService', ["$q", "$http", "Config", function ($q, $http, Config
       })
       return def.promise;
     }
-    function getTheatresById(id){
+    function getShowTimeByTheatreId(id){
       var def = $q.defer();
-      $http.get(Config.base_url + Config.endpoints.getTheatres+"/"+id).success(function(data){
-        def.resolve(data[0]);
+      $http.get(Config.base_url + Config.endpoints.getShowTime+"/"+id).success(function(data){
+        def.resolve(data);
       })
       .error(function(){
         def.reject("fail");

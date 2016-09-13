@@ -26,6 +26,7 @@ app.factory('Config', [function() {
     endpoints: {
       getMovies: "/Movies",
       getTheatres: "/Theatres",
+      getShowTime: "/Showtime",
     }
   };
 }]);

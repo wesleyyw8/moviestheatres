@@ -2,7 +2,7 @@ app.service('dataService', ["$q", "$http", "Config", function ($q, $http, Config
     var service = {
       getMovies: getMovies,
       getTheatres: getTheatres,
-      getTheatresById: getTheatresById
+      getShowTimeByTheatreId: getShowTimeByTheatreId
     };
     return service;
     function getTheatres(){
@@ -15,10 +15,10 @@ app.service('dataService', ["$q", "$http", "Config", function ($q, $http, Config
       })
       return def.promise;
     }
-    function getTheatresById(id){
+    function getShowTimeByTheatreId(id){
       var def = $q.defer();
-      $http.get(Config.base_url + Config.endpoints.getTheatres+"/"+id).success(function(data){
-        def.resolve(data[0]);
+      $http.get(Config.base_url + Config.endpoints.getShowTime+"/"+id).success(function(data){
+        def.resolve(data);
       })
       .error(function(){
         def.reject("fail");
